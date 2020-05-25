@@ -527,7 +527,7 @@ class MainApp(MDApp):
         anim.start(self.root.ids.window_manager.get_screen("login_window").ids.login_card)
 
     def animate_background(self):
-        anim = Animation(size_hint_y=1, duration=2.)
+        anim = Animation(size_hint_y=0.6, duration=2.)
         anim.start(self.root.ids.window_manager.get_screen("login_window").ids.login_background)
 
     """ LOGIN SCREEN ANIMATIONS END"""
@@ -535,7 +535,7 @@ class MainApp(MDApp):
     """ REGISTER SCREEN ANIMATIONS START"""
 
     def animate_register_background(self):
-        anim = Animation(size_hint_x=0.6, duration=2.)
+        anim = Animation(size_hint_x=0.7, duration=2.)
         anim.start(self.root.ids.window_manager.get_screen("register_window").ids.register_background)
 
     def animate_register_card(self):

@@ -16,25 +16,38 @@
 
         BoxLayout:
             orientation: "horizontal"
-            padding: [130, 0, 0, 0]
-            Widget:
+            padding: 50
+            spacing: 100
+            size_hint: (1, 0.4)
+            MDIconButton:
                 canvas.before:
                     Color:
                         rgba: utils.get_color_from_hex('#a30000')
                     Ellipse:
                         pos: self.pos
-            Widget:
+                        size: self.size
+                icon: "plus"
+                size_hint: (0.3, 0.2)
+
+            MDIconButton:
                 canvas.before:
                     Color:
                         rgba: utils.get_color_from_hex('#a30000')
                     Ellipse:
                         pos: self.pos
-            Widget:
+                        size: self.size
+                icon: "plus"
+                size_hint: (0.3, 0.2)
+
+            MDIconButton:
                 canvas.before:
                     Color:
                         rgba: utils.get_color_from_hex('#a30000')
                     Ellipse:
                         pos: self.pos
+                        size: self.size
+                icon: "plus"
+                size_hint: (0.3, 0.2)
 
     MDCard:
         id: login_card
