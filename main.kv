@@ -1,0 +1,219 @@
+#:import utils kivy.utils
+#:include kv_files/alert_message.kv
+#:include kv_files/login_screen.kv
+#:include kv_files/register_screen.kv
+#:include kv_files/addproblem_popup.kv
+#:include kv_files/navigation_drawer.kv
+#:include kv_files/climbing_grid.kv
+#:include kv_files/problem_entry.kv
+
+<ScreenOne>:
+    orientation: "vertical"
+    spacing: 10
+    padding: 20
+
+<ScreenTwo>:
+    orientation: "vertical"
+    spacing: 10
+    padding: 20
+    canvas.before:
+        Color:
+            rgba: utils.get_color_from_hex('#ffffff')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<ScreenThree>:
+    orientation: "vertical"
+    spacing: 10
+    padding: 20
+
+<Controller>:
+    message: message
+    screen_one_sequence: screen_one_sequence
+    orientation: "vertical"
+
+    NavigationLayout:
+
+        WindowManager:
+            id: window_manager
+
+            LoginScreen:
+                name: "login_window"
+
+            MainScreen:
+                name: "main_window"
+
+                BoxLayout:
+                    orientation: "vertical"
+
+                    MDToolbar:
+                        id: toolbar
+                        title: "WayUp"
+                        md_bg_color: utils.get_color_from_hex('#373737')
+                        specific_text_color: utils.get_color_from_hex('#ffffff')
+                        left_action_items: [["menu", lambda x: nav_drawer.set_state(new_state='toggle')]]
+
+
+                    MDBottomNavigation:
+                        id: panel
+                        panel_color: utils.get_color_from_hex('#373737')
+                        item_color: utils.get_color_from_hex('#ffffff')
+
+                        MDBottomNavigationItem:
+                            name: "files3"
+                            text: "Wall"
+                            icon: "grid"
+
+
+                            ScreenOne:
+                                id: screen_one
+                                screen_one_sequence: screen_one_sequence
+
+                                MDLabel:
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#373737')
+                                        Line:
+                                            width: 1
+                                            rectangle: self.x, self.y, self.width, self.height
+                                    id: screen_one_sequence
+                                    text: "Add sequence by clicking on the holds!"
+                                    font_name: "JetBrainsMono"
+                                    halign: "center"
+                                    size_hint: (0.8, 0.05)
+                                    pos_hint: {'x': .1}
+
+                                ClimbingGrid:
+                                    id: wall_system
+                                    size_hint: (0.8, 0.9)
+                                    pos_hint: {'x': .1}
+
+                                MDLabel:
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#373737')
+                                        Line:
+                                            width: 1
+                                            rectangle: self.x, self.y, self.width, self.height
+                                    id: screen_one_problem_name
+                                    text: "No problem has been loaded yet"
+                                    theme_text_color: "Custom"
+                                    text_color: app.theme_cls.primary_color
+                                    font_name: "JetBrainsMono"
+                                    halign: "center"
+                                    size_hint: (0.8, 0.05)
+                                    pos_hint: {'x': .1}
+
+
+                        MDBottomNavigationItem:
+                            name: "files1"
+                            text: "Problems"
+                            icon: "database"
+
+                            ScreenTwo:
+                                id: screen_two
+                                search_button: search_button
+                                problem_search_input: problem_search_input
+
+                                BoxLayout:
+                                    orientation: "horizontal"
+                                    size_hint: (1, 0.05)
+                                    spacing: 10
+
+                                    TextInput:
+                                        id: problem_search_input
+                                        canvas.before:
+                                            Color:
+                                                rgba: utils.get_color_from_hex('#373737')
+                                            Line:
+                                                width: 2
+                                                rectangle: self.x, self.y, self.width, self.height
+                                        font_name: "JetBrainsMono"
+                                        hint_text: "Search problem by name"
+                                        hint_text_color: app.theme_cls.primary_color
+                                        #background_active: self.background_normal
+                                        multiline: False
+                                        on_text_validate: self.parent.parent.filter_problems()
+                                        size_hint: (0.8, 1)
+
+                                    Button:
+                                        id: search_button
+                                        text: "Search"
+                                        text_color: utils.get_color_from_hex('#ffffff')
+                                        background_color: utils.get_color_from_hex('#8e8e8e')
+                                        halign: "center"
+                                        background_down: ""
+                                        size_hint: (0.2, 1)
+                                        on_press: self.parent.parent.filter_problems()
+                                BoxLayout:
+                                    orientation: "horizontal"
+                                    size_hint: (1, 0.05)
+                                    Slider:
+                                        id: slider
+                                        min: 4
+                                        max: 9
+                                        step: 1
+                                        orientation: 'horizontal'
+                                        size_hint: (0.8, 1)
+
+                                    MDLabel:
+                                        canvas.before:
+                                            Color:
+                                                rgba: utils.get_color_from_hex('#373737')
+                                            Line:
+                                                width: 2
+                                                rectangle: self.x, self.y, self.width, self.height
+                                        text: str(slider.value)
+                                        halign: "center"
+                                        text_color: utils.get_color_from_hex('#373737')
+                                        size_hint: (0.2, 1)
+
+
+                                ScrollView:
+                                    size_hint: (1, 0.9)
+                                    do_scroll_x: False
+                                    bar_color: utils.get_color_from_hex('#373737')
+
+                                    ProblemList:
+                                        spacing: 10
+                                        id: problem_list
+
+
+
+                        MDBottomNavigationItem:
+                            name: "files2"
+                            text: "Statistics"
+                            icon: "graphql"
+
+                            ScreenThree:
+                                id: screen_three
+
+                                MDLabel:
+                                    id: message
+                                    font_style: "Body1"
+                                    theme_text_color: "Primary"
+                                    text: "I programming of C++"
+                                    halign: "center"
+                                    size_hint: (1, 0.1)
+
+                                MDRoundFlatButton:
+                                    text: "Send message to the server"
+                                    pos_hint: {"center_x": .5}
+                                    on_press: root.btn()
+                                    size_hint: (1, 0.1)
+
+            RegisterScreen:
+                name: "register_window"
+
+
+
+
+
+
+        MDNavigationDrawer:
+            id: nav_drawer
+
+            ContentNavigationDrawer:
+                id: content_drawer
+

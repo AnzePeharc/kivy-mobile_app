@@ -1,0 +1,80 @@
+<RegisterScreen>:
+    new_user_name: new_user_name
+    new_user_email: new_user_email
+    new_user_password: new_user_password
+    MDCard:
+        id: register_card
+        orientation: "vertical"
+        size_hint: [0.8, 0.5]
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        padding: [20, 0, 20, 0]
+        BoxLayout:
+            orientation: "vertical"
+            spacing: 20
+            MDIcon:
+                size_hint: (0.2, 0.2)
+                pos_hint: {"center_x": 0.5, "center_y": 1}
+                icon: "assets/Way_up_logo_transperant-1.png"
+                halign: "center"
+                valign: "center"
+
+            MDTextField:
+                size_hint: (1, 0.1)
+                id: new_user_name
+                hint_text: "Name"
+                required: True
+                mode: "rectangle"
+
+
+            MDTextField:
+                size_hint: (1, 0.1)
+                id: new_user_email
+                hint_text: "Email"
+                required: True
+                helper_text_mode: "on_error"
+                helper_text: ""
+                mode: "rectangle"
+                on_focus:
+                    app.check_email(self)
+                on_text_validate:
+                    app.check_email(self)
+
+            MDTextField:
+                size_hint: (1, 0.1)
+                id: new_user_password
+                hint_text: "Password"
+                required: True
+                helper_text_mode: "on_error"
+                helper_text: ""
+                password: True
+                mode: "rectangle"
+                on_focus:
+                    app.check_password(self)
+                on_text_validate:
+                    app.check_password(self)
+
+            MDFillRoundFlatButton:
+                size_hint: (1, 0.1)
+                id: sign_up
+                text: "Sign Up"
+                pos_hint: {"center_x": 0.5}
+                on_press: root.check_credentials()
+
+
+            BoxLayout:
+                size_hint: (1, 0.1)
+                orientation: "horizontal"
+
+                MDLabel:
+                    size_hint: (0.5, 1)
+                    text: "Already have an account?"
+                    valign: "bottom"
+
+                MDFlatButton:
+                    size_hint: (0.5, 1)
+                    id: to_sign_in
+                    text: "Sign In"
+                    halign: "left"
+                    text_size: "50sp"
+                    text_color: 0, 0, 1, 1
+                    on_press: app.change_window("login_window", "right")

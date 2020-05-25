@@ -1,0 +1,98 @@
+<LoginScreen>:
+
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            id: login_background
+            orientation: "vertical"
+            size_hint_y: 0.1
+            canvas.before:
+                Color:
+                    rgba: utils.get_color_from_hex('#8e8e8e')
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [0, 0, 40, 40]
+
+        BoxLayout:
+            orientation: "horizontal"
+            padding: [130, 0, 0, 0]
+            Widget:
+                canvas.before:
+                    Color:
+                        rgba: utils.get_color_from_hex('#a30000')
+                    Ellipse:
+                        pos: self.pos
+            Widget:
+                canvas.before:
+                    Color:
+                        rgba: utils.get_color_from_hex('#a30000')
+                    Ellipse:
+                        pos: self.pos
+            Widget:
+                canvas.before:
+                    Color:
+                        rgba: utils.get_color_from_hex('#a30000')
+                    Ellipse:
+                        pos: self.pos
+
+    MDCard:
+        id: login_card
+        orientation: "vertical"
+        size_hint: [0.8, 0.6]
+        pos_hint: {"center_x": 0.5, "center_y": 0}
+        padding: [20, 0, 20, 0]
+        spacing: 15
+        LoginLayout:
+
+<LoginLayout>:
+    password: password
+    email: email
+    to_sign_up: to_sign_up
+    sign_in: sign_in
+    orientation: "vertical"
+    spacing: 20
+    MDIcon:
+        size_hint: (0.3, 0.5)
+        pos_hint: {"center_x": 0.5, "center_y": 1}
+        icon: "assets/Way_up_logo_transperant-1.png"
+        halign: "center"
+        valign: "center"
+    MDLabel:
+        text: "SIGN IN"
+        text_size: self.size
+        bold: True
+        markup: True
+        halign: "center"
+        valign: "center"
+
+    MDTextField:
+        id: email
+        hint_text: "Email"
+
+    MDTextField:
+        id: password
+        hint_text: "Password"
+        password: True
+
+    MDFillRoundFlatButton:
+        id: sign_in
+        text: "Sign In"
+        size_hint_x: 0.8
+        pos_hint: {"center_x": 0.5}
+        on_press: app.sign_in(self)
+
+    MDRectangleFlatButton:
+        id: to_sign_up
+        text: "Sign Up"
+        size_hint_x: 0.5
+        pos_hint: {"center_x": 0.5}
+        on_press: app.change_window("register_window", "left")
+
+    MDFlatButton:
+        size_hint: (0.2, 0.1)
+        id: password_recovery
+        text: "Forgot your password?"
+        halign: "left"
+        text_size: self.size
+        text_color: 0, 0, 1, 1
