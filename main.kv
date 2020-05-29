@@ -115,6 +115,7 @@
                                 id: screen_two
                                 search_button: search_button
                                 problem_search_input: problem_search_input
+                                problem_search_slider: problem_search_slider
 
                                 BoxLayout:
                                     orientation: "horizontal"
@@ -145,17 +146,19 @@
                                         halign: "center"
                                         background_down: ""
                                         size_hint: (0.2, 1)
-                                        on_press: self.parent.parent.filter_problems()
+                                        on_press: self.parent.parent.filter_problems_by_name()
                                 BoxLayout:
                                     orientation: "horizontal"
                                     size_hint: (1, 0.05)
+                                    spacing: 10
                                     Slider:
-                                        id: slider
+                                        id: problem_search_slider
+                                        value: 7
                                         min: 4
                                         max: 9
                                         step: 1
                                         orientation: 'horizontal'
-                                        size_hint: (0.8, 1)
+                                        size_hint: (0.6, 1)
 
                                     MDLabel:
                                         canvas.before:
@@ -164,16 +167,32 @@
                                             Line:
                                                 width: 2
                                                 rectangle: self.x, self.y, self.width, self.height
-                                        text: str(slider.value)
+                                        text: "Grade difficulty: " + str(problem_search_slider.value)
                                         halign: "center"
                                         text_color: utils.get_color_from_hex('#373737')
                                         size_hint: (0.2, 1)
+
+                                    Button:
+                                        id: slider_button
+                                        text: "Filter by grade"
+                                        text_color: utils.get_color_from_hex('#ffffff')
+                                        background_color: utils.get_color_from_hex('#8e8e8e')
+                                        halign: "center"
+                                        background_down: ""
+                                        size_hint: (0.2, 1)
+                                        on_press: self.parent.parent.filter_problems_by_grade()
 
 
                                 ScrollView:
                                     size_hint: (1, 0.9)
                                     do_scroll_x: False
                                     bar_color: utils.get_color_from_hex('#373737')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#373737')
+                                        Line:
+                                            width: 2
+                                            rectangle: self.x, self.y, self.width, self.height
 
                                     ProblemList:
                                         spacing: 10
