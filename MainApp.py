@@ -41,12 +41,14 @@ from kivymd.uix.list import OneLineIconListItem, MDList, OneLineListItem, ThreeL
 from kivy.core.window import Window
 from kivymd.uix.selectioncontrol import MDCheckbox
 
+"""SCREEN IMPORTS"""
 from screens.screenone import ScreenOne
 from screens.screentwo import ScreenTwo
 from screens.LoginScreen import LoginScreen
 from screens.RegisterScreen import RegisterScreen
 from screens.MainScreen import MainScreen
 from screens.screenthree import ScreenThree
+from screens.UserScreen import UserScreen
 
 """Set screen size for tablet"""
 Window.size = (800, 1280)
@@ -79,7 +81,11 @@ class Controller(BoxLayout):
 
 
 class ContentNavigationDrawer(BoxLayout):
-    pass
+    user_name = ObjectProperty()
+
+    def navigate_to_user_screen(self):
+        self.parent.set_state("close")
+        MDApp.get_running_app().navigate_to_user_screen(self.user_name.text, "test")
 
 
 """SIDE MENU FRAMEWORK"""
@@ -257,6 +263,7 @@ class DrawerList(ThemableBehavior, MDList):
             popup = AddProblemPopUp(MDApp.get_running_app().root.ids.screen_one_sequence.text)
             popup.open()
         elif instance_item.text == "Reset Wall":
+            print(self.parent.parent.parent)
             self.parent.parent.parent.set_state("close")
             MDApp.get_running_app().root.ids.screen_one_sequence.text = "Add sequence by clicking on the holds!"
             MDApp.get_running_app().root.ids.screen_one_problem_name.text = "No problem has been loaded yet"
@@ -616,6 +623,10 @@ class MainApp(MDApp):
 
         else:
             instance_textfield.error = False
+
+    def navigate_to_user_screen(self, name, email):
+        self.change_window("user_window", "right")
+        self.root.ids.window_manager.get_screen("user_window").set_user_info(name, email)
 
 
 MainApp().run()

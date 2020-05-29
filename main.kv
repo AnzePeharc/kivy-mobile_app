@@ -7,6 +7,7 @@
 #:include kv_files/climbing_grid.kv
 #:include kv_files/problem_entry.kv
 
+
 <ScreenOne>:
     orientation: "vertical"
     spacing: 10
@@ -225,8 +226,32 @@
             RegisterScreen:
                 name: "register_window"
 
+            UserScreen:
+                name: "user_window"
+                user_name: user_name
+                BoxLayout:
+                    orientation: "vertical"
+                    MDToolbar:
+                        id: toolbar
+                        title: "WayUp"
+                        md_bg_color: utils.get_color_from_hex('#373737')
+                        specific_text_color: utils.get_color_from_hex('#ffffff')
+                        left_action_items: [["menu", lambda x: nav_drawer.set_state(new_state='toggle')]]
 
+                    BoxLayout:
+                        orientation: "vertical"
+                        spacing: 10
+                        padding: 20
+                        Label:
+                            id: user_name
+                            text: ""
 
+                        Button:
+                            text: "test1"
+                            size_hint: (1, 0.5)
+                        Button:
+                            text: "Dela2"
+                            size_hint: (1, 0.5)
 
 
 

@@ -15,19 +15,22 @@
     orientation: "vertical"
     padding: "8dp"
     spacing: "8dp"
+    user_name: user_name
 
     AnchorLayout:
         anchor_x: "left"
         size_hint_y: None
         height: avatar.height
 
-        Image:
+        MDIconButton:
             id: avatar
             size_hint: None, None
             size: "56dp", "56dp"
-            source: "assets/IMG_2865.png"
+            icon: "assets/IMG_2865.png"
+            on_press: root.navigate_to_user_screen()
 
     MDLabel:
+        id: user_name
         background_color: utils.get_color_from_hex('#373737')
         text: "Anze Peharc"
         font_style: "Button"
