@@ -625,7 +625,7 @@ class MainApp(MDApp):
             instance_textfield.error = False
 
     def navigate_to_user_screen(self, name, email):
-        self.change_window("user_window", "right")
+        self.change_window("user_window", "left")
         self.root.ids.window_manager.get_screen("user_window").set_user_info(name, email)
 
 

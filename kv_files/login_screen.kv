@@ -74,8 +74,9 @@
     MDLabel:
         text: "SIGN IN"
         text_size: self.size
-        bold: True
         markup: True
+        font_style: "H6"
+        font_name: "JetBrainsMono"
         halign: "center"
         valign: "center"
 
@@ -91,6 +92,8 @@
     MDFillRoundFlatButton:
         id: sign_in
         text: "Sign In"
+        font_style: "H6"
+        font_name: "JetBrainsMono"
         size_hint_x: 0.8
         pos_hint: {"center_x": 0.5}
         on_press: app.sign_in(self)
@@ -98,14 +101,18 @@
     MDRectangleFlatButton:
         id: to_sign_up
         text: "Sign Up"
+        font_style: "H6"
+        font_name: "JetBrainsMono"
         size_hint_x: 0.5
         pos_hint: {"center_x": 0.5}
         on_press: app.change_window("register_window", "left")
 
     MDFlatButton:
-        size_hint: (0.2, 0.1)
+        size_hint: (0.3, 0.1)
         id: password_recovery
         text: "Forgot your password?"
+        font_style: "H6"
+        font_name: "JetBrainsMono"
         halign: "left"
         text_size: self.size
         text_color: 0, 0, 1, 1

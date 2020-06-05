@@ -57,6 +57,8 @@
                 size_hint: (1, 0.1)
                 id: sign_up
                 text: "Sign Up"
+                font_style: "H6"
+                font_name: "JetBrainsMono"
                 pos_hint: {"center_x": 0.5}
                 on_press: root.check_credentials()
 
@@ -68,12 +70,16 @@
                 MDLabel:
                     size_hint: (0.5, 1)
                     text: "Already have an account?"
+                    font_style: "Body1"
+                    font_name: "JetBrainsMono"
                     valign: "bottom"
 
                 MDFlatButton:
                     size_hint: (0.5, 1)
                     id: to_sign_in
                     text: "Sign In"
+                    font_style: "H6"
+                    font_name: "JetBrainsMono"
                     halign: "left"
                     text_size: "50sp"
                     text_color: 0, 0, 1, 1
