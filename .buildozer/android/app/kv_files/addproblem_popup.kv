@@ -1,0 +1,81 @@
+<AddProblemPopUp>
+    title: "Add Problem"
+    title_align: "center"
+    size_hint: (None, None)
+    size: (700, 700)
+    auto_dismiss: False
+    background: "assets/light_grey.png"
+    separator_color: utils.get_color_from_hex('#a30000')
+    separator_height: "5dp"
+    id: popup
+    sequence_label: sequence_label
+    problem_name: problem_name
+    setter_name: setter_name
+    comment: comment
+    grade: grade
+
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 10
+        padding: 20
+
+        MDLabel:
+            id: sequence_label
+            text_color: utils.get_color_from_hex('#ffffff')
+            text: popup.sequence
+            size_hint: (1, 0.2)
+
+        Spinner:
+            id: grade
+            text_color: utils.get_color_from_hex('#ffffff')
+            background_color: utils.get_color_from_hex('#8e8e8e')
+            size_hint: (1, 0.1)
+            text: 'Select problem grade'
+            values: '4a', '4b', '4c', '5a', '5b', '5c', '6a', '6b', '6c', '7a', '7b', '7c', '8a', '8b', '8c'
+
+        MDTextField:
+            id: problem_name
+            line_color: utils.get_color_from_hex('#ffffff')
+            background_color: utils.get_color_from_hex('#8e8e8e')
+            required: True
+            hint_text: "Problem name"
+            helper_text_mode: "on_error"
+            helper_text: "Name is required"
+            mode: "rectangle"
+            size_hint: (1, 0.2)
+
+
+        MDTextField:
+            id: setter_name
+            text_color: utils.get_color_from_hex('#ffffff')
+            background_color: utils.get_color_from_hex('#8e8e8e')
+            required: True
+            hint_text: "Setter name"
+            helper_text_mode: "on_error"
+            helper_text: "Setter name is required"
+            mode: "rectangle"
+            size_hint: (1, 0.2)
+
+        MDTextField:
+            id: comment
+            text_color: utils.get_color_from_hex('#ffffff')
+            background_color: utils.get_color_from_hex('#8e8e8e')
+            hint_text: "Comment"
+            mode: "rectangle"
+            size_hint: (1, 0.2)
+
+        MDRectangleFlatButton:
+            text: "Add Problem"
+            text_color: utils.get_color_from_hex('#ffffff')
+            md_bg_color: utils.get_color_from_hex('#8e8e8e')
+            halign: "Center"
+            size_hint: (1, 0.2)
+            on_press: root.close()
+
+        MDRectangleFlatButton:
+            text: "Cancel"
+            text_color: utils.get_color_from_hex('#ffffff')
+            md_bg_color: utils.get_color_from_hex('#8e8e8e')
+            halign: "Center"
+            size_hint: (1, 0.1)
+            on_press: root.dismiss()

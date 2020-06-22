@@ -1,0 +1,19 @@
+<AlertMessage>:
+    size_hint: (0.4, 0.1)
+    auto_dismiss: False
+    alert_message: alert_message
+    background: "assets/light_grey.png"
+    md_bg_color: app.theme_cls.primary_palette
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            size_hint: (1, 0.6)
+            font_size: "15dp"
+            id: alert_message
+            text: ""
+
+        MDFillRoundFlatButton:
+            size_hint: (0.2, 0.4)
+            text: "Okay"
+            pos_hint: {"center_x": 0.5}
+            on_press: root.dismiss()

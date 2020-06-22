@@ -1,0 +1,31 @@
+<Problem>:
+    canvas.before:
+        Color:
+            rgba: utils.get_color_from_hex('#373737')
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    text: "Three-line item"
+    text_style: "bold"
+    theme_text_color: "Custom"
+    text_color: app.theme_cls.primary_color
+    font_name: "JetBrainsMono"
+    font_style: "Body1"
+    secondary_text: "This is a multi-line label where you can"
+    secondary_theme_text_color: "Custom"
+    secondary_text_color: utils.get_color_from_hex('#ffffff')
+    tertiary_text: "fit more text than usual"
+    tertiary_theme_text_color: "Custom"
+    tertiary_text_color: utils.get_color_from_hex('#8e8e8e')
+    on_release: self.parent.select_problem(self)
+
+    Container:
+        id: container
+
+        MDIconButton:
+            icon: "plus"
+            user_font_size: "32sp"
+            theme_text_color: "Custom"
+            text_color: app.theme_cls.primary_color
+            on_press: root.parent.add_problem_to_personal_list(self)
