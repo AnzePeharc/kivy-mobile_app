@@ -1,15 +1,13 @@
 import socket
 # import neopixel
-
+# import board
 
 """ Neopixel Settings"""
 """
 pixel_pin = board.D18
 num_pixels = 50
 
-pixels = neopixel.NeoPixel(
-    pixel_pin, num_pixels, brightness=0.8, auto_write=False, pixel_order=neopixel.RGB
-)
+pixels = neopixel.NeoPixel(pixel_pin, num_pixels, pixel_order=neopixel.RGB)
 
 
 
@@ -21,6 +19,7 @@ pixels = neopixel.NeoPixel(
 host = 'localhost'  # "172.20.10.3"
 port = 12345
 serv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+serv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 serv.bind((host, port))
 serv.listen(5)
 while True:
@@ -35,16 +34,23 @@ while True:
         else:  # process the message, to light the correct pixels
             client_message = client_message.split(", ")
             print(client_message)
+            """
+            Reset LED lights before each new message
+            
+            pixels.fill((0, 0, 0))
+            led_counter = 0
+            
+            """
             for led in client_message:
                 print(int(led))
                 """
                 if led_counter == 0:
-                    pixels[led].fill(0, 255, 0) # light the first led green
+                    pixels[int(led)] = (0, 255, 0) # light the first led green
                     
                 elif led_counter == len(client_message):
-                    pixels[led].fill(255, 0, 0) # light the last led red
+                    pixels[int(led)] = (255, 0, 0) # light the last led red
                 else:
-                    pixels[led].fill(0, 0, 255) # light all other led blue
+                    pixels[int(led)] = (0, 0, 255) # light all other led blue
                     
                 led_counter += 1
                 """
