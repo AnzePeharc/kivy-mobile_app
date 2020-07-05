@@ -2,8 +2,14 @@
 
 #include <SPI.h>
 #include <WiFi.h>
+#include <FastLED.h>
 
+// FASTLED Settings
+#define LED_PIN     6
+#define NUM_LEDS    50
+CRGB leds[NUM_LEDS];
 
+// change ssid and pass according to your WiFi network
 char ssid[] = "PeharcUniverse";      // your network SSID (name)
 char pass[] = "druzinapeharc";   // your network password
 int keyIndex = 0;                 // your network key Index number (needed only for WEP)
@@ -15,6 +21,7 @@ WiFiServer server(80);
 void setup() {
   //Initialize serial and wait for port to open:
   Serial.begin(9600);
+  FastLED.addLeds<WS2811, LED_PIN, RGB>(leds, NUM_LEDS);
   while (!Serial) {
     ; // wait for serial port to connect. Needed for native USB port only
   }
@@ -57,6 +64,11 @@ void loop() {
       if (client.available()) {
         char c = client.read();
         Serial.write(c);
+        Serial.println("");
+     // leds[0].r = 255;
+        leds[0] = CRGB(0, 0, 0);
+        FastLED.show();
+        delay(1000);
       }
       delay(10);
     }
